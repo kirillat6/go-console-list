@@ -17,6 +17,8 @@ func main(){
 	tasks := make([]models.Task, 0)
 	comands.Help()
 	fmt.Println("")
+	
+	for {
 	fmt.Print("Введите команду: ")
 	scanner := bufio.NewScanner(os.Stdin)
 	if ok := scanner.Scan(); !ok {
@@ -25,12 +27,15 @@ func main(){
 	}
 	text := scanner.Text()
 	fields := strings.Fields(text)
-	for {
 		switch fields[0] {
 			case "help":
 				comands.Help()
 			case "add":
-				comands.CreateTask(fields[1], fields[2], false, time.Now(), &tasks)
+				str := ""
+				for i := 2; i < len(fields); i++ {
+					str += (fields[i] + " ")
+				}
+				comands.CreateTask(fields[1], str, false, time.Now(), &tasks)
 			case "list":
 				comands.GetAllTasks(tasks)
 			case "del":

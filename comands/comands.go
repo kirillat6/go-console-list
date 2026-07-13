@@ -46,6 +46,7 @@ func CompleteTask(tasks []models.Task, completedTask string) {
 			tasks[k].IsComplete = true
 			now := time.Now()
 			tasks[k].CompletedAt = &now
+			fmt.Println("Задача выполнена!")
 		}
 	}
 }
